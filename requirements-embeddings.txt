@@ -1,0 +1,32 @@
+# Optional: install this on top of requirements.txt to enable semantic
+# (embedding-based) matching in app/relevance.py and app/deeplink_matcher.py,
+# replacing their TF-IDF / difflib keyword fallbacks with a local sentence-
+# embedding model. This is what lets a query saying "screen stays black"
+# correctly match an article/catalog entry saying "display unresponsive" —
+# no shared vocabulary, but obviously the same issue.
+#
+#     pip install -r requirements.txt -r requirements-embeddings.txt
+#
+# Heads-up before installing:
+#   - This pulls in `torch` as a transitive dependency — expect the install
+#     to add several hundred MB to a few GB, depending on your platform's
+#     CPU/GPU wheel.
+#   - The model weights (~90 MB for the default all-MiniLM-L6-v2) are
+#     downloaded from the Hugging Face Hub the FIRST time the service
+#     starts, and cached locally after that. This needs outbound network
+#     access on that first run; if your deployment target has none, either
+#     pre-download the model into its cache directory as a build step, or
+#     simply don't install this file — the service falls back to its
+#     original TF-IDF/difflib behaviour automatically (see the module
+#     docstrings in app/embeddings.py, app/relevance.py, and
+#     app/deeplink_matcher.py for exactly how that fallback works).
+#   - After installing, run `python scripts/calibrate_semantic_matching.py`
+#     — the match-confidence thresholds in app/config.py were set from
+#     general knowledge of this model family, NOT empirically tuned against
+#     this specific catalog (no network access to do that tuning while
+#     building this). The calibration script shows you real scores on known
+#     match/non-match examples so you can adjust
+#     DEEPLINK_MATCH_THRESHOLD_EMBEDDINGS / WEAK_RETRIEVAL_THRESHOLD with
+#     confidence before relying on this for grading.
+
+sentence-transformers>=2.7,<4.0

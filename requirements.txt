@@ -1,0 +1,44 @@
+# Core dependencies — running `pip install -r requirements.txt` alone gets
+# you a fully working service: TF-IDF relevance scoring, keyword/difflib
+# deeplink matching, and an in-memory fast-path cache. See
+# requirements-embeddings.txt and requirements-llm.txt for the optional
+# upgrades layered on top (both are designed to fail open — the service
+# runs identically well without them, just with the plainer fallback
+# behaviour described in each module's docstring).
+
+# Web framework + ASGI server
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+
+# Request/response validation. Pydantic v2 is required (not v1) —
+# app/models.py uses v2's ConfigDict(strict=True); schema.py (organiser-
+# supplied, untouched) only uses plain BaseModel/Enum/Optional fields that
+# work identically under v2.
+pydantic>=2.6,<3.0
+
+# TF-IDF relevance scoring fallback (app/relevance.py) — pure
+# scikit-learn, no pretrained model download required. Used automatically
+# whenever requirements-embeddings.txt isn't installed.
+scikit-learn>=1.3,<2.0
+numpy>=1.24,<3.0
+
+# Fast-path result cache (app/cache.py), SQLite-backed under the hood but
+# pure-Python — no separate server process, and small enough to always
+# include in the core set. Falls back to an in-memory dict automatically
+# if this somehow fails to initialize (e.g. a read-only filesystem).
+diskcache>=5.6,<6.0
+
+# Loads .env into the process environment automatically (see the top of
+# app/config.py) — without this, copying .env.example to .env and filling
+# it in would silently have no effect.
+python-dotenv>=1.0,<2.0
+
+# HTTP client for the optional LLM hook's fallback path (app/llm_client.py)
+# and for the vendor-SDK fallback in general. Only actually used for
+# outbound calls if LLM_PROVIDER is set to "anthropic" or "gemini"; the
+# service runs fine without ever making an outbound call.
+requests>=2.31,<3.0
+
+# Test suite
+pytest>=7.4,<9.0
+httpx>=0.27,<1.0

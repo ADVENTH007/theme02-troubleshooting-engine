@@ -1,0 +1,16 @@
+# Optional: install this on top of requirements.txt to let app/llm_client.py
+# use each vendor's official SDK (native retries, typed responses, clearer
+# error classes) instead of its plain-`requests` HTTPS fallback.
+#
+#     pip install -r requirements.txt -r requirements-llm.txt
+#
+# This is ONLY relevant if you set LLM_PROVIDER=anthropic or
+# LLM_PROVIDER=gemini in your .env (see .env.example) — with the default
+# LLM_PROVIDER=none, neither of these packages is ever imported, and the
+# service makes zero outbound calls related to this file. If you enable an
+# LLM_PROVIDER but skip installing this file, app/llm_client.py detects the
+# missing SDK and automatically uses its `requests`-based fallback instead
+# — nothing breaks either way (see app/llm_client.py's module docstring).
+
+anthropic>=0.34,<1.0
+google-genai>=0.3,<1.0
