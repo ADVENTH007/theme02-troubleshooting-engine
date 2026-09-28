@@ -19,14 +19,9 @@ WORKDIR /app
 COPY requirements.txt requirements-embeddings.txt requirements-llm.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Optional: build with `--build-arg INSTALL_EMBEDDINGS=true` to bake in the
-# semantic-matching upgrade (sentence-transformers + torch — adds several
-# hundred MB to the image and downloads ~90MB of model weights during this
-# build step, so it needs network access at build time). Left off by
-# default so the base image stays small and builds without requiring
-# network access beyond PyPI — the service runs correctly either way (see
-# app/embeddings.py's module docstring for the automatic fallback).
-ARG INSTALL_EMBEDDINGS=false
+# Set to true by default so semantic-matching (sentence-transformers + torch)
+# is baked in directly during standard builds, pre-downloading model weights.
+ARG INSTALL_EMBEDDINGS=true
 RUN if [ "$INSTALL_EMBEDDINGS" = "true" ]; then \
         pip install --no-cache-dir -r requirements-embeddings.txt && \
         python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"; \
