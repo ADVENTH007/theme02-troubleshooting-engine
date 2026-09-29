@@ -15,6 +15,8 @@ for the original task notes this was built from.
 ---
 DEMO VIDEO
 https://drive.google.com/file/d/1zW33K9jar1KeqxphiHLQ4EdJkWwT7QR_/view?usp=sharing
+DEMO VIDEO 2nd HALF
+https://drive.google.com/file/d/1pHcMfgeNfQGqrj76E_5qRu-cffjS2x2Z/view?usp=sharing
 
 ## Quickstart
 
@@ -40,6 +42,10 @@ curl -s -X POST http://127.0.0.1:8000/v1/troubleshoot \
            }
          }' | python -m json.tool
 ```
+
+
+curl -s -X POST "http://127.0.0.1:8000/v1/troubleshoot" -H "Content-Type: application/json" -d @sample_request.json | python -m json.tool
+
 
 Opening the bare server URL in a browser redirects to
 **http://127.0.0.1:8000/docs** — FastAPI's interactive Swagger UI, where
