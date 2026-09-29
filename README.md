@@ -13,6 +13,8 @@ Built for **Theme 02** of the Samsung PRISM GenAI Hackathon. See `samples/BRIEF.
 for the original task notes this was built from.
 
 ---
+DEMO VIDEO
+https://drive.google.com/file/d/1zW33K9jar1KeqxphiHLQ4EdJkWwT7QR_/view?usp=sharing
 
 ## Quickstart
 
@@ -46,8 +48,8 @@ you can paste a request body and hit "Try it out" directly.
 ### Run without installing anything globally (Docker)
 
 ```bash
-docker build -t troubleshoot-engine .
-docker run --rm -p 8000:8000 troubleshoot-engine
+docker build --build-arg INSTALL_EMBEDDINGS=true -t samsung-troubleshoot-engine .
+docker run -p 8000:8000 samsung-troubleshoot-engine
 ```
 
 ### Batch-run all 20 sample queries at once (no server needed)
