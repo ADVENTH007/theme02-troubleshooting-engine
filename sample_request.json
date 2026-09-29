@@ -1,0 +1,7 @@
+{
+  "original_query": "tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+  "siis_response": {
+    "title": "Email server not responding on Samsung phone or tablet",
+    "content": "Smartphone,Others Mobile,Mobile Accessories,Tablet Email server not responding on Samsung phone or tablet:\n# Troubleshooting Email Connection Issues on Your Samsung Phone\nIf you're having trouble accessing your email on your Samsung phone, here are some steps you can take to resolve the issue.\n\n## Step 1: Check Email Access on a PC\nFirst, try accessing your email on a personal computer. This helps determine if the problem is with your phone's connection or your email account itself.\n\n## Step 2: Verify Your Phone's Internet Connection\nEnsure your phone is connected to a stable Wi-Fi or mobile data network.\nSwipe down from the top of your phone's screen to open the Quick settings panel.\nTouch and hold the Wi-Fi icon to check your connection status.\nAlternatively, go to Settings, tap Connections, and then tap Wi-Fi.\n\n## Step 3: Clear the Email App's Cache and Data\nClearing the cache and data for your email app can resolve temporary glitches.\nTo clear the app's cache:\nNavigate to Settings.\nTap Apps.\nSelect your email app.\nTap Storage.\nTap Clear cache.\n\n## Step 4: Restart Your Phone in Safe Mode\nUsing Safe mode helps identify if a third-party app is causing conflicts.\nPress and hold the Power button or Side button.\nTouch and hold the Power off icon.\nTap Safe mode when it appears on the screen."
+  }
+}
